@@ -4,6 +4,16 @@ plugins {
 }
 
 android {
+    flavorDimensions "version"
+    productFlavors {
+        dev {
+            dimension "version"
+        }
+        prod {
+            dimension "version"
+        }
+    }
+
     compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
@@ -24,6 +34,6 @@ android {
     }
 }
 
-dependencies  {
+dependencies {
     implementation "com.google.android.material:material:$material_version"
 }

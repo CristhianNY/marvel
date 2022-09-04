@@ -33,23 +33,25 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "junit:junit:$junit_version"
-    implementation project(":support")
-    implementation project(path: ':domain')
-    testImplementation("org.mockito:mockito-core:$mockito_version")
-    testImplementation "android.arch.core:core-testing:$arch_core_version"
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$core_ktx_version"
-    testImplementation "androidx.test.ext:junit:$junit_androidx_version"
-    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoKotlin"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$core_ktx_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$android_core_ktx_version"
+    implementation 'androidx.test.ext:junit-ktx:1.1.3'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$core_ktx_version"
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$core_ktx_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$android_core_ktx_version"
+    implementation "androidx.lifecycle:lifecycle-extensions:$lifecycleExtensions"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
 
+    testImplementation "junit:junit:$junit_version"
+    testImplementation "androidx.test.ext:junit:$junit_androidx_version"
 }
 preBuild.dependsOn(ktlintFormat, ktlintCheck)

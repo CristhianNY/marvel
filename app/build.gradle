@@ -8,11 +8,13 @@ plugins {
 }
 apply from: '../ktlint.gradle.kts'
 
+def APP_NAME = 'Marvel'
 android {
     lintOptions {
         disable 'NullSafeMutableLiveData'
     }
     flavorDimensions 'version'
+
     compileSdkVersion 32
     buildToolsVersion "30.0.3"
 
@@ -36,8 +38,48 @@ android {
         targetSdkVersion 32
         versionCode 10
         versionName "3.0"
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+
+    productFlavors {
+        dev {
+            dimension "version"
+            applicationIdSuffix ".dev"
+            versionNameSuffix "-dev"
+            signingConfig signingConfigs.debug
+            buildConfigField "String", "BASE_URL", '"https://dev-genu.truenorthco.ninja"'
+            resValue "string", "app_name", "DEV Marvel"
+        }
+
+        prod {
+            dimension "version"
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "String", "BASE_URL", '"https://dev-genu.truenorthco.ninja"'
+            resValue "string", "app_name", "Marvel"
+        }
+    }
+
+    sourceSets {
+        dev {
+            java.srcDirs = ['src/dev/java']
+            res.srcDirs = ['src/dev/res']
+            assets.srcDirs = ['src/dev/assets']
+        }
+
+        prod {
+            java.srcDirs = ['src/prod/java']
+            res.srcDirs = ['src/prod/res']
+            assets.srcDirs = ['src/prod/assets']
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def appName = APP_NAME
+
+            outputFileName = "Marvel-${appName}-" + "${variant.versionName}.apk"
+        }
     }
 
     compileOptions {
@@ -54,38 +96,22 @@ android {
 }
 
 dependencies {
-    implementation project(":core")
+    kapt "com.google.dagger:hilt-compiler:$dagger_hilt"
     implementation project(":resources")
     implementation project(":domain")
     implementation project(":data")
+    implementation project(":support")
     implementation project(":feature-marvel-characters")
-
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation "androidx.core:core-ktx:$core_version"
-    implementation "androidx.appcompat:appcompat:$app_compat_version"
-    implementation "com.google.android.material:material:$material_version"
-    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
-    implementation "com.google.dagger:hilt-android:$dagger_hilt"
-    kapt "com.google.dagger:hilt-compiler:$dagger_hilt"
-    implementation "androidx.multidex:multidex:$multidex_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$core_ktx_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$android_core_ktx_version"
+    implementation app_android.values()
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "com.squareup.retrofit2:converter-gson:$gson_converter"
-    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
-    implementation "com.xwray:groupie:$groupie_version"
-    implementation "com.xwray:groupie-databinding:$groupie_version"
     implementation "com.airbnb.android:lottie:$lottie_version"
-    testImplementation "junit:junit:$junit_version"
     testImplementation("org.mockito:mockito-core:$mockito_version")
-    testImplementation "android.arch.core:core-testing:$arch_core_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$core_ktx_version"
     testImplementation "androidx.test:core:$test_core"
     testImplementation "androidx.test.ext:truth:$test_truth"
     testImplementation "com.google.truth:truth:$google_truth_truth"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$okhttpLoggingVersion"
 }
 preBuild.dependsOn(ktlintFormat, ktlintCheck)
