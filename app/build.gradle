@@ -48,14 +48,16 @@ android {
             applicationIdSuffix ".dev"
             versionNameSuffix "-dev"
             signingConfig signingConfigs.debug
-            buildConfigField "String", "BASE_URL", '"https://dev-genu.truenorthco.ninja"'
+            buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com:443/v1/"'
+            buildConfigField "String", "API_KEY", '"094fd5135afba6378bc683013cd77bb7"'
             resValue "string", "app_name", "DEV Marvel"
         }
 
         prod {
             dimension "version"
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", '"https://dev-genu.truenorthco.ninja"'
+            buildConfigField "String", "BASE_URL", '"https://gateway.marvel.com:443/v1/"'
+            buildConfigField "String", "API_KEY", '"094fd5135afba6378bc683013cd77bb7"'
             resValue "string", "app_name", "Marvel"
         }
     }

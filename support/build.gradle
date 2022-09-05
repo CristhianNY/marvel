@@ -53,5 +53,11 @@ dependencies {
 
     testImplementation "junit:junit:$junit_version"
     testImplementation "androidx.test.ext:junit:$junit_androidx_version"
+
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.google.code.gson:gson:$gson_version"
+    implementation "com.squareup.retrofit2:converter-gson:$gson_converter"
+    kapt "com.google.dagger:hilt-compiler:$dagger_hilt"
+    implementation "com.google.dagger:hilt-android:$dagger_hilt"
 }
 preBuild.dependsOn(ktlintFormat, ktlintCheck)

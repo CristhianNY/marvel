@@ -53,8 +53,8 @@ class NetworkModule {
                     .contains(endpointToAvoidToken)
                 ) {
                     requestBuilder.addHeader(
-                        "Authorization",
-                        "Bearer "
+                        "api-key",
+                        "094fd5135afba6378bc683013cd77bb7"
                     )
                 }
             }
