@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/marvelCharacterListFragment"
-        android:name="com.cristhianbonilla.feature_marvel_characters.MarvelCharacterListFragment"
+        android:name="com.cristhianbonilla.feature_marvel_characters.character_list.MarvelCharacterListFragment"
         android:label="MarvelCharacterListFragment"
         tools:layout="@layout/fragment_marvel_character_list"/>
 </navigation>
