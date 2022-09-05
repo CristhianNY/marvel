@@ -1,18 +1,28 @@
 package com.cristhianbonilla.data.characters.entity
 
+import com.cristhianbonilla.domain.characters.model.CharacterModel
 import com.google.gson.annotations.SerializedName
 
 data class CharacterEntity(
     @SerializedName("id")
-    val id: String,
+    val id: String?,
     @SerializedName("modified")
-    val modified: String,
+    val modified: String?,
     @SerializedName("name")
-    val name: String,
+    val name: String?,
     @SerializedName("resourceURI")
-    val resourceURI: String,
+    val resourceURI: String?,
     @SerializedName("thumbnail")
     val thumbnail: CharacterThumbnailEntity,
     @SerializedName("urls")
     val urls: List<CharacterUrlEntity>
 )
+
+fun CharacterEntity.toModel(): CharacterModel =
+    CharacterModel(
+        id.orEmpty(),
+        modified.orEmpty(),
+        name.orEmpty(),
+        resourceURI.orEmpty(),
+        thumbnail.toModel(),
+        urls.map { it.toModel() })
