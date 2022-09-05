@@ -1,6 +1,5 @@
 package com.cristhianbonilla.domain.characters.model
 
-
 data class CharacterModel(
     val id: String,
     val modified: String,

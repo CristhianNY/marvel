@@ -25,4 +25,5 @@ fun CharacterEntity.toModel(): CharacterModel =
         name.orEmpty(),
         resourceURI.orEmpty(),
         thumbnail.toModel(),
-        urls.map { it.toModel() })
+        urls.map { it.toModel() }
+    )
