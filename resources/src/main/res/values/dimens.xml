@@ -2,4 +2,5 @@
 <resources>
     <dimen name="marvel_logo_size">200dp</dimen>
     <dimen name="zero_dp">0dp</dimen>
+    <dimen name="margin_top_character_image_detail">24dp</dimen>
 </resources>

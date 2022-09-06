@@ -10,6 +10,6 @@ interface MarvelApi {
     @GET("public/characters")
     suspend fun getCharacterList(): Response<CharacterResponseEntity>
 
-    @GET("public/characters{characterId}")
+    @GET("public/characters/{characterId}")
     suspend fun getCharacterById(@Path("characterId") characterId: String): Response<CharacterDetailResponseEntity>
 }

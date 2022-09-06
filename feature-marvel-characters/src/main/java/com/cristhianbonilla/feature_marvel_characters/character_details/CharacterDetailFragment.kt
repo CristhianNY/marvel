@@ -8,6 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.bumptech.glide.Glide
 import com.cristhianbonilla.domain.characters.model.detail.CharacterModel
 import com.cristhianbonilla.feature_marvel_characters.R
 import com.cristhianbonilla.feature_marvel_characters.databinding.FragmentCharacterDetailBinding
@@ -53,5 +54,9 @@ class CharacterDetailFragment : Fragment() {
 
     private fun loadCharacterInformation(characterList: List<CharacterModel>?) {
         Toast.makeText(requireContext(), characterList.toString(), Toast.LENGTH_LONG).show()
+        val imageSelected = characterList?.first()?.thumbnail?.let {
+            it.path.plus(".").plus(it.extension)
+        }
+        Glide.with(this).load(imageSelected).centerCrop().into(binding.ivCharacterSelected)
     }
 }
