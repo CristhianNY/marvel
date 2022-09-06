@@ -1,4 +1,4 @@
-package com.cristhianbonilla.domain.characters.model
+package com.cristhianbonilla.domain.characters.model.list
 
 data class CharacterModel(
     val id: String,

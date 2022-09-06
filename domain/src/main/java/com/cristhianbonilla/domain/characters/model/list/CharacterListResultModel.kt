@@ -1,4 +1,4 @@
-package com.cristhianbonilla.domain.characters.model
+package com.cristhianbonilla.domain.characters.model.list
 
 data class CharacterListResultModel(
     val characterEntities: List<CharacterModel>,

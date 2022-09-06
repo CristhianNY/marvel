@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.cristhianbonilla.domain.characters.model.CharacterModel
+import com.cristhianbonilla.domain.characters.model.list.CharacterModel
 import com.cristhianbonilla.feature_marvel_characters.databinding.CharacterItemViewBinding
 
 private const val DOT = "."

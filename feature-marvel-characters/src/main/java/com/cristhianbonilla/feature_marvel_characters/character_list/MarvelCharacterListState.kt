@@ -1,6 +1,6 @@
 package com.cristhianbonilla.feature_marvel_characters.character_list
 
-import com.cristhianbonilla.domain.characters.model.CharacterModel
+import com.cristhianbonilla.domain.characters.model.list.CharacterModel
 
 sealed class MarvelCharacterListState {
     object Loading : MarvelCharacterListState()

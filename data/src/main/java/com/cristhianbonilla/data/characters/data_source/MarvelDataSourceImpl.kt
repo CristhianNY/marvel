@@ -12,4 +12,10 @@ class MarvelDataSourceImpl @Inject constructor(private val marvelApi: MarvelApi)
             marvelApi.getCharacterList()
         }
     }
+
+    override suspend fun getCharacterById(characterId: String) = getResult {
+        executeNetworkAction {
+            marvelApi.getCharacterById(characterId)
+        }
+    }
 }

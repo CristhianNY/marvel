@@ -1,6 +1,6 @@
-package com.cristhianbonilla.data.characters.entity
+package com.cristhianbonilla.data.characters.entity.list
 
-import com.cristhianbonilla.domain.characters.model.CharacterListResultModel
+import com.cristhianbonilla.domain.characters.model.list.CharacterListResultModel
 import com.google.gson.annotations.SerializedName
 
 data class CharacterListResultEntity(

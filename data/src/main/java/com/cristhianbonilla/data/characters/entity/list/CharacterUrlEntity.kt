@@ -1,6 +1,6 @@
-package com.cristhianbonilla.data.characters.entity
+package com.cristhianbonilla.data.characters.entity.list
 
-import com.cristhianbonilla.domain.characters.model.CharacterUrlModel
+import com.cristhianbonilla.domain.characters.model.list.CharacterUrlModel
 import com.google.gson.annotations.SerializedName
 
 data class CharacterUrlEntity(
