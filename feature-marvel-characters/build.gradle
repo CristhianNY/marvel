@@ -63,5 +63,6 @@ dependencies {
     testImplementation "androidx.test.ext:truth:$test_truth"
     testImplementation "com.google.truth:truth:$google_truth_truth"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 }
 preBuild.dependsOn(ktlintFormat, ktlintCheck)
