@@ -12,7 +12,8 @@ import com.cristhianbonilla.feature_marvel_characters.databinding.CharacterItemV
 
 private const val DOT = "."
 
-class CharacterListAdapter : ListAdapter<CharacterModel, RecyclerView.ViewHolder>(CharacterDiff) {
+class CharacterListAdapter(private val action: (characterModel: CharacterModel) -> Unit) :
+    ListAdapter<CharacterModel, RecyclerView.ViewHolder>(CharacterDiff) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding =
             CharacterItemViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -28,7 +29,12 @@ class CharacterListAdapter : ListAdapter<CharacterModel, RecyclerView.ViewHolder
         fun bind(character: CharacterModel) {
             val imageUrl: String = character.thumbnail.let { it.path.plus(DOT).plus(it.extension) }
             binding.ivCharacter.apply {
-                Glide.with(context).load(imageUrl).apply(RequestOptions().override(600, 600)).centerCrop().into(binding.ivCharacter)
+                Glide.with(context).load(imageUrl).apply(RequestOptions().override(600, 600))
+                    .centerCrop().into(binding.ivCharacter)
+            }
+
+            binding.ivCharacter.setOnClickListener {
+                action.invoke(character)
             }
         }
     }
