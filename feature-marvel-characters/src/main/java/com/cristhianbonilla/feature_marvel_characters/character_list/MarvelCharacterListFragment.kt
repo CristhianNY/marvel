@@ -14,6 +14,7 @@ import com.cristhianbonilla.feature_marvel_characters.R
 import com.cristhianbonilla.feature_marvel_characters.character_list.adapter.CharacterListAdapter
 import com.cristhianbonilla.feature_marvel_characters.databinding.FragmentMarvelCharacterListBinding
 import com.cristhianbonilla.support.config.fragmentBinding
+import com.cristhianbonilla.support.config.setUpLoader
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -53,12 +54,17 @@ class MarvelCharacterListFragment : Fragment() {
 
     private fun observeViewModeEvents() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
+            this.setUpLoader(
+                binding.container,
+                binding.loader,
+                false
+            )
             when (state) {
-                is MarvelCharacterListState.Loading -> Toast.makeText(
-                    requireContext(),
-                    requireContext().getString(R.string.loading),
-                    Toast.LENGTH_LONG
-                ).show()
+                is MarvelCharacterListState.Loading -> this.setUpLoader(
+                    binding.container,
+                    binding.loader,
+                    true
+                )
                 is MarvelCharacterListState.ShowMarvelCharacterList -> fillCharacterList(state.characterList)
 
                 is MarvelCharacterListState.Error -> Toast.makeText(
@@ -72,9 +78,5 @@ class MarvelCharacterListFragment : Fragment() {
 
     private fun fillCharacterList(characterList: List<CharacterModel>?) {
         characterListAdapter.submitList(characterList)
-    }
-
-    private fun characterClicked(characterModel: CharacterModel) {
-        Toast.makeText(requireContext(), characterModel.name, Toast.LENGTH_LONG).show()
     }
 }

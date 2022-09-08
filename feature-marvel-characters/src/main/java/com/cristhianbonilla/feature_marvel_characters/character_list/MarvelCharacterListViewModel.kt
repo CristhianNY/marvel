@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.cristhianbonilla.domain.characters.usecase.GetCharactersListUseCase
 import com.cristhianbonilla.feature_marvel_characters.character_list.MarvelCharacterListState.Error
+import com.cristhianbonilla.feature_marvel_characters.character_list.MarvelCharacterListState.Loading
 import com.cristhianbonilla.feature_marvel_characters.character_list.MarvelCharacterListState.ShowMarvelCharacterList
 import com.cristhianbonilla.support.config.ResultDomain
 import com.cristhianbonilla.support.config.UseCase
@@ -21,6 +22,7 @@ class MarvelCharacterListViewModel @Inject constructor(private val getCharacters
     val state = _state.asLiveData()
 
     fun getCharacterList() {
+        setState(Loading)
         viewModelScope.launch {
             when (
                 val response = getCharactersListUseCase(UseCase.None)

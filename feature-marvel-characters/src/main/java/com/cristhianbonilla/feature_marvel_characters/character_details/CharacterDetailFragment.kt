@@ -14,6 +14,7 @@ import com.cristhianbonilla.domain.characters.model.detail.CharacterModel
 import com.cristhianbonilla.feature_marvel_characters.R
 import com.cristhianbonilla.feature_marvel_characters.databinding.FragmentCharacterDetailBinding
 import com.cristhianbonilla.support.config.fragmentBinding
+import com.cristhianbonilla.support.config.setUpLoader
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,23 +44,21 @@ class CharacterDetailFragment : Fragment() {
 
     private fun observeViewModeEvents() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
-            setUpLoader(false)
+            this.setUpLoader(
+                binding.container,
+                binding.loader,
+                false
+            )
             when (state) {
-                is CharacterDetailState.Loading -> setUpLoader(true)
+                is CharacterDetailState.Loading -> this.setUpLoader(
+                    binding.container,
+                    binding.loader,
+                    true
+                )
                 is CharacterDetailState.ShowCharacterDetail -> loadCharacterInformation(state.characterList)
 
                 is CharacterDetailState.Error -> handleError()
             }
-        }
-    }
-
-    private fun setUpLoader(isVisible: Boolean) {
-        if (isVisible) {
-            binding.container.visibility = View.INVISIBLE
-            binding.loader.visibility = View.VISIBLE
-        } else {
-            binding.container.visibility = View.VISIBLE
-            binding.loader.visibility = View.GONE
         }
     }
 
