@@ -18,6 +18,7 @@ class CharacterDetailViewModel @Inject constructor(private val getCharacterByIdU
     val state = _state.asLiveData()
 
     fun getCharacterDetailById(characterId: String) {
+        setState(CharacterDetailState.Loading)
         viewModelScope.launch {
             when (
                 val response = getCharacterByIdUseCase(GetCharacterByIdUseCase.Params(characterId))

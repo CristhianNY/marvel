@@ -2,6 +2,7 @@ package com.cristhianbonilla.feature_marvel_characters.character_details
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -31,32 +32,51 @@ class CharacterDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeViewModeEvents()
         viewModel.getCharacterDetailById(args.characterId.orEmpty())
+
+        binding.container.setOnTouchListener { _, event ->
+            if (event.action == MotionEvent.ACTION_MOVE) {
+                binding.scrollDownAnimation.visibility = View.GONE
+            }
+            true
+        }
     }
 
     private fun observeViewModeEvents() {
         viewModel.state.observe(viewLifecycleOwner) { state ->
+            setUpLoader(false)
             when (state) {
-                is CharacterDetailState.Loading -> Toast.makeText(
-                    requireContext(),
-                    requireContext().getString(R.string.loading),
-                    Toast.LENGTH_LONG
-                ).show()
+                is CharacterDetailState.Loading -> setUpLoader(true)
                 is CharacterDetailState.ShowCharacterDetail -> loadCharacterInformation(state.characterList)
 
-                is CharacterDetailState.Error -> Toast.makeText(
-                    requireContext(),
-                    requireContext().getString(R.string.error_getting_marvel_characters),
-                    Toast.LENGTH_LONG
-                ).show()
+                is CharacterDetailState.Error -> handleError()
             }
         }
     }
 
+    private fun setUpLoader(isVisible: Boolean) {
+        if (isVisible) {
+            binding.container.visibility = View.INVISIBLE
+            binding.loader.visibility = View.VISIBLE
+        } else {
+            binding.container.visibility = View.VISIBLE
+            binding.loader.visibility = View.GONE
+        }
+    }
+
     private fun loadCharacterInformation(characterList: List<CharacterModel>?) {
-        Toast.makeText(requireContext(), characterList.toString(), Toast.LENGTH_LONG).show()
         val imageSelected = characterList?.first()?.thumbnail?.let {
             it.path.plus(".").plus(it.extension)
         }
         Glide.with(this).load(imageSelected).centerCrop().into(binding.ivCharacterSelected)
+        binding.tvTitle.text = characterList?.first()?.name.orEmpty()
+        binding.tvDescription.text = characterList?.first()?.description.orEmpty()
+    }
+
+    private fun handleError() {
+        Toast.makeText(
+            requireContext(),
+            requireContext().getString(R.string.error_getting_marvel_characters),
+            Toast.LENGTH_LONG
+        ).show()
     }
 }
