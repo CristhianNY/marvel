@@ -22,7 +22,7 @@
                 <ImageView
                     android:id="@+id/ivCharacterSelected"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/image_size"
                     android:layout_marginEnd="@dimen/generic_margin"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"

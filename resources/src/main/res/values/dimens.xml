@@ -8,5 +8,5 @@
     <dimen name="divider_size">1dp</dimen>
     <dimen name="image_details_margin_top">30dp</dimen>
     <dimen name="description_text_size">15sp</dimen>
-
+    <dimen name="image_size">300dp</dimen>
 </resources>
