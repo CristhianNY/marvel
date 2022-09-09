@@ -21,9 +21,6 @@ android {
         }
     }
 
-    lintOptions {
-        disable 'NullSafeMutableLiveData'
-    }
     flavorDimensions 'version'
     compileSdkVersion 32
     buildToolsVersion "30.0.3"
@@ -44,7 +41,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
     buildFeatures {
         dataBinding true
     }
@@ -56,14 +55,16 @@ dependencies {
     implementation project(":domain")
     implementation project(":support")
     implementation app_android.values()
+    testImplementation "junit:junit:$junit_version"
     testImplementation("org.mockito:mockito-core:$mockito_version")
-    testImplementation "android.arch.core:core-testing:$arch_core_version"
+    testImplementation "androidx.arch.core:core-testing:$arch_core_version"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:$core_ktx_version"
     testImplementation "androidx.test:core:$test_core"
     testImplementation "androidx.test.ext:truth:$test_truth"
     testImplementation "com.google.truth:truth:$google_truth_truth"
     implementation "com.airbnb.android:lottie:$lottie_version"
     androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
+    androidTestImplementation "androidx.arch.core:core-testing:$mockito_version"
     annotationProcessor "com.github.bumptech.glide:compiler:$glide_version"
 }
 preBuild.dependsOn(ktlintFormat, ktlintCheck)

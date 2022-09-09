@@ -1,6 +1,6 @@
 package com.cristhianbonilla.data
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.cristhianbonilla.TestCoroutineRule
 import com.cristhianbonilla.TestDispatcherProvider
 import com.cristhianbonilla.data.characters.api.MarvelApi

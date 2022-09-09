@@ -1,6 +1,6 @@
 package com.cristhianbonilla.domain.usecase
 
-import android.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.cristhianbonilla.domain.TestCoroutineRule
 import com.cristhianbonilla.domain.characters.repository.MarvelRepository
 import com.cristhianbonilla.domain.characters.usecase.GetCharacterByIdUseCase
